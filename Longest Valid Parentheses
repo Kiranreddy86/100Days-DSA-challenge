@@ -1,0 +1,32 @@
+class Solution {
+    public int longestValidParentheses(String s) {
+        return helper(s);
+    }
+
+    private int helper(String s) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1); // Initialize with a dummy index
+
+        int maxCount = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char currentChar = s.charAt(i);
+
+            if (currentChar == '(') {
+                stack.push(i);
+            } else {
+                stack.pop();
+
+                if (stack.isEmpty()) {
+                    // If stack is empty, push the current index
+                    stack.push(i);
+                } else {
+                    // Calculate the length of valid substring
+                    maxCount = Math.max(maxCount, i - stack.peek());
+                }
+            }
+        }
+
+        return maxCount;
+    }
+}
