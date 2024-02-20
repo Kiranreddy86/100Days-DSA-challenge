@@ -1,0 +1,24 @@
+class Solution {
+    public int characterReplacement(String s, int k) {
+        char[] arr = s.toCharArray();
+        int maxCount = 0;
+        int maxLen = 0;
+        int[] count = new int[26];
+
+        int left = 0;
+        for (int right = 0; right < arr.length; right++) {
+            count[arr[right] - 'A']++;
+            maxCount = Math.max(maxCount, count[arr[right] - 'A']);
+
+            // If the window size - maxCount is greater than k, shrink the window
+            if (right - left + 1 - maxCount > k) {
+                count[arr[left] - 'A']--;
+                left++;
+            }
+
+            // Update the maximum length of the substring with at most k replacements
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+        return maxLen;
+    }
+}
