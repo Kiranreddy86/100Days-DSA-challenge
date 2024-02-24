@@ -1,0 +1,19 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        return helper(matrix,target);
+    }
+    public boolean helper(int[][] matrix,int target){
+        int rowLen=matrix.length;
+        int colLen=matrix[0].length;
+        for(int row=0;row<rowLen;row++){
+            if(matrix[row][0]<=target){
+                for(int col=0;col<colLen;col++){
+                    if(matrix[row][col]==target){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
