@@ -1,0 +1,46 @@
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        
+        int index=binarysearch(nums,0,nums.length-1,target);
+        if(index==-1){
+            return new int[]{-1,-1};
+        }else{
+            int middle=index;
+            int first=middle;
+        int last=middle;
+            
+            while(index>0){
+                if(nums[index-1]==target){
+                    first=index-1;
+                    index--;
+                }else{
+                    break;
+                }
+            }
+            while(index<nums.length-1){
+                if(nums[index+1]==target){
+                    last=index+1;
+                    index++;
+                }else{
+                    break;
+                }
+            }
+            return new int[]{first,last};
+        }
+        
+    }
+    public int binarysearch(int[] nums,int start,int end,int target){
+        if(start>end){
+            return -1;
+        }
+        int mid=(start+end)/2;
+        if(nums[mid]==target){
+            return mid;
+        }
+        if(nums[mid]>target){
+            return binarysearch(nums,start,mid-1,target);
+        }else{
+            return binarysearch(nums,mid+1,end,target);
+        }
+    }
+}
